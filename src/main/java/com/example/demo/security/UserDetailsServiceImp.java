@@ -1,7 +1,7 @@
 package com.example.demo.security;
 
-import com.example.demo.dao.UserDao;
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,14 +9,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+
 @Service("userDetailsServiceImp")
 @Transactional
 public class UserDetailsServiceImp implements UserDetailsService {
 
-    @Autowired
-    private UserDao userDao;
+    private final UserRepository userRepository;
 
     private User user;
+
+    @Autowired
+    public UserDetailsServiceImp(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User getUser() {
         return user;
@@ -24,8 +30,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        this.user = userDao.loadUserByUsername(username);
-        return userDao.loadUserByUsername(username);
+        this.user = userRepository.findUserByUsername(username);
+        return userRepository.findUserByUsername(username);
     }
 
 }

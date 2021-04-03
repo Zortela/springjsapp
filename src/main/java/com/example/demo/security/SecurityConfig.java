@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .successHandler(new LoginSuccessHandler())
+                .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .permitAll();
 

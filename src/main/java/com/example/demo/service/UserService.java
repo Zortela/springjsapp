@@ -6,13 +6,13 @@ import com.example.demo.model.User;
 import java.util.List;
 
 public interface UserService {
-    void add(User user);
+    void save(User user);
 
-    List<User> getAllUsers();
+    List<User> findAll();
 
     User getUser(Long id);
 
-    void updateUser(User user);
+    void updateUser(User user, Long id);
 
     void deleteUser(Long id);
 

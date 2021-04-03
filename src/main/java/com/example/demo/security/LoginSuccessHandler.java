@@ -24,9 +24,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                 .anyMatch(x -> x.getAuthority().equals("ROLE_ADMIN"));
 
         User user = (User) authentication.getPrincipal();
-
         if (admin) {
-            httpServletResponse.sendRedirect("/admin/");
+            httpServletResponse.sendRedirect("/admin/test");
         } else {
             httpServletResponse.sendRedirect("/user/" + user.getId());
         }
