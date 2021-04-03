@@ -31,15 +31,6 @@ public class LoginController {
         return "service/login";
     }
 
-//
-//    @GetMapping(value = "/user/{id}")
-//    public String helloUser(Model model, @PathVariable("id") Long id) {
-//        User user = userService.getUser(userDetailsServiceImp.getUser().getId());
-//        model.addAttribute("admin", userDetailsServiceImp.getUser());
-//        model.addAttribute("user", user);
-//        return "user/getUser";
-//    }
-
     @GetMapping("/user/json")
     public ResponseEntity<UserDto> getUser() {
         User userActive = userDetailsServiceImp.getUser();
@@ -50,7 +41,6 @@ public class LoginController {
     public String UserPage(@PathVariable("id") Long id) {
         return "user/getUser";
     }
-
 
     @GetMapping("/admin/test")
     public String getAllUsers() {
