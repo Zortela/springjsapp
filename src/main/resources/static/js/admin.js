@@ -129,14 +129,14 @@ addUserForm.addEventListener("submit", (e) => {
 // method: POST
 function editModal(id) {
 
-    $("#editModal").modal('show')
+    $("#editModal").modal('show');
 
     fetch(`${url}/` + id)
         .then(res => res.json())
         .then(data => {
             $("#editID").val(data.id)
             $("#editUsername").val(data.username)
-            $("#editPassword").val(data.password)
+            $("#editPassword").val("");
             $("#editName").val(data.name)
             $("#editSurname").val(data.surname)
             $("#editAge").val(data.age)
@@ -161,10 +161,10 @@ function editUser() {
         })
     })
         .then(res => res.json())
-        .then(getTable())
-        .then($("#editModal").modal('hide'))
-
-
+        .then(() => {
+            $("#editModal").modal('hide');
+            getTable();
+        })
 }
 
 
@@ -175,7 +175,6 @@ function deleteModal(id) {
     fetch(`${url}/` + id)
         .then(res => res.json())
         .then(data => {
-            console.log(data.id)
             $("#deleteID").val(data.id)
             $("#deleteUsername").val(data.username)
             $("#deletePassword").val(data.password)
@@ -186,10 +185,12 @@ function deleteModal(id) {
 }
 
 function deleteUser() {
-    fetch(`${url}/` + $("#deleteID").val(), {method: "DELETE"})
-        .then(res => res.json())
-        .then($("#deleteModal").modal('hide'))
-        .then(getTable())
+    fetch(`${url}/` + $("#deleteID").val(),
+        {method: "DELETE"})
+        .then(() => {
+            $('#deleteModal').modal('hide');
+            getTable();
+        })
 
 }
 
@@ -217,15 +218,16 @@ function getCheckboxRoles(id) {
     return result;
 }
 
-// Close editModal
-function closeEditModal() {
-    $('#editModal').modal('hide');
-}
-
-// Close deleteModal
-function closeDeleteModal() {
-    $('#deleteModal').modal('hide');
-}
+//
+// // Close editModal
+// function closeEditModal() {
+//     $('#editModal').modal('hide');
+// }
+//
+// // Close deleteModal
+// function closeDeleteModal() {
+//     $('#deleteModal').modal('hide');
+// }
 
 function formClear() {
     $("#newUsername").val("");

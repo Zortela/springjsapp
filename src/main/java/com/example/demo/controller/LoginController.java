@@ -2,17 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.mapping.Mapping;
-import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.security.UserDetailsServiceImp;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class LoginController {
@@ -37,13 +33,14 @@ public class LoginController {
         UserDto userDtoActive = Mapping.mapToUserDto(userActive);
         return ResponseEntity.ok().body(userDtoActive);
     }
+
     @GetMapping(value = "/user/{id}")
     public String UserPage(@PathVariable("id") Long id) {
         return "user/getUser";
     }
 
-    @GetMapping("/admin/test")
+    @GetMapping("/admin/")
     public String getAllUsers() {
-        return "admin/test";
+        return "/admin/index";
     }
 }
